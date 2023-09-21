@@ -1,19 +1,20 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:leaf_detector/pages/camera.dart';
-import 'package:leaf_detector/pages/chat.dart';
+import 'package:leaf_detector/pages/chatScreen.dart';
 
-void main() {
+late List<CameraDescription> cameras;
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  cameras = await availableCameras();
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Leaf Detector',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
