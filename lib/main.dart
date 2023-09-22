@@ -1,9 +1,12 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:leaf_detector/pages/chatScreen.dart';
 
 late List<CameraDescription> cameras;
 Future<void> main() async {
+  await Hive.initFlutter();
+  var box = await Hive.openBox('mybox');
   WidgetsFlutterBinding.ensureInitialized();
   cameras = await availableCameras();
   runApp(const MyApp());

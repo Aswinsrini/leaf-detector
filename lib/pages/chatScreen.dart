@@ -1,6 +1,8 @@
 import 'dart:io';
 import "package:image_picker/image_picker.dart";
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:leaf_detector/data/database.dart';
 
 class ChatScreen extends StatefulWidget {
   @override
@@ -8,6 +10,9 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+  final _myBox = Hive.box("mybox");
+  ChatDataBase db = ChatDataBase();
+
   final TextEditingController _messageController = TextEditingController();
   List<ChatMessage> _messages = [];
   File? image; // Declare it at the class level
@@ -29,6 +34,16 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   @override
+  void initState() {
+    if (_myBox.get('chat_hist') == null) {
+      db.createInitialData();
+    } else {
+      db.loadData();
+    }
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
 // Add this line
 
@@ -39,12 +54,28 @@ class _ChatScreenState extends State<ChatScreen> {
         centerTitle: true,
       ),
       body: isMore
-          ? const Column(
-              children: [
-                Center(
-                  child: Text('More Page'),
-                ),
-              ],
+          ? Container(
+              margin: EdgeInsets.all(14),
+              child: Column(
+                children: [
+                  const Center(
+                    child: Text(
+                        "More about this application:\nThis application is an AI-powered tool designed to identify and provide information about different types of leaves. you can simply upload leaf images, and the chatbot utilizes machine learning algorithms to classify them, often offering details about the plant species and care instructions. It's a valuable resource for nature enthusiasts, gardeners, and researchers, aiding in plant identification and fostering environmental awareness. With continuous improvements in accuracy and expanding botanical databases, leaf detection chatbots are becoming increasingly reliable and informative. They play a crucial role in promoting biodiversity knowledge and sustainable plant management."),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      exit(0);
+                    },
+                    child: const Text(
+                      'Exit',
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.red),
+                    ),
+                  ),
+                ],
+              ),
             )
           : Column(
               children: <Widget>[
@@ -133,7 +164,7 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
-  void _handleSubmittedMessage(String text, File? imageFile) {
+  void _handleSubmittedMessage(String text, File? imageFile) async {
     if (text.isEmpty && imageFile == null) {
       return;
     }
@@ -146,6 +177,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
     setState(() {
       _messages.add(message);
+      saveNewTask(message);
     });
 
     _messageController.clear();
@@ -214,10 +246,17 @@ class _ChatScreenState extends State<ChatScreen> {
 
     setState(() {
       _messages.add(message);
+      saveNewTask(message);
     });
     setState(() {
       galleryFile = null;
       _imageFile = null; // Clear the selected image file
+    });
+  }
+
+  void saveNewTask(ChatMessage msg) {
+    setState(() {
+      db.chat_hist.add(msg);
     });
   }
 }
