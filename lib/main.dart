@@ -1,6 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:leaf_detector/data/ex.dart';
 import 'package:leaf_detector/pages/chatScreen.dart';
 
 late List<CameraDescription> cameras;

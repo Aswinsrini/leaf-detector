@@ -1,8 +1,11 @@
 import 'dart:io';
+import 'package:excel/excel.dart';
 import "package:image_picker/image_picker.dart";
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:leaf_detector/data/database.dart';
+import 'package:leaf_detector/data/ex.dart';
+import 'package:leaf_detector/data/func.dart';
 
 class ChatScreen extends StatefulWidget {
   @override
@@ -20,6 +23,7 @@ class _ChatScreenState extends State<ChatScreen> {
   int current_Index = 0;
   File? galleryFile;
   bool isMore = false;
+  String output = "";
   final picker = ImagePicker();
 
   void onTabTapped(int index) {
@@ -40,6 +44,7 @@ class _ChatScreenState extends State<ChatScreen> {
     } else {
       db.loadData();
     }
+
     super.initState();
   }
 
@@ -107,6 +112,7 @@ class _ChatScreenState extends State<ChatScreen> {
                             ],
                           ),
                           child: TextField(
+                            maxLines: null,
                             controller: _messageController,
                             onChanged: (text) {
                               // You can handle text input changes here
@@ -133,8 +139,12 @@ class _ChatScreenState extends State<ChatScreen> {
                       IconButton(
                         icon: const Icon(Icons.send),
                         onPressed: () {
+                          setState(() {
+                            output = _messageController.text;
+                          });
                           _handleSubmittedMessage(
                               _messageController.text, _imageFile);
+                          outputFromBot(output);
                         },
                       ),
                     ],
@@ -237,16 +247,25 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
-  void fileAdded() {
+  void fileAdded() async {
+    String bot = await postImage(galleryFile!);
+    // print(bot + " from bot");
+    bot = "The Image you provided is " + bot;
     ChatMessage message = ChatMessage(
       text: '',
       isUser: true,
       imageFile: galleryFile,
     );
+    ChatMessage m1 = ChatMessage(
+      text: bot,
+      isUser: false,
+      imageFile: null,
+    );
 
     setState(() {
       _messages.add(message);
-      saveNewTask(message);
+      _messages.add(m1);
+      // saveNewTask(message);
     });
     setState(() {
       galleryFile = null;
@@ -258,6 +277,21 @@ class _ChatScreenState extends State<ChatScreen> {
     setState(() {
       db.chat_hist.add(msg);
     });
+  }
+
+  void outputFromBot(String sentence) async {
+    List<String> msg = await ExcelReader().readExcel(sentence);
+    for (String m1 in msg) {
+      ChatMessage message = ChatMessage(
+        text: m1,
+        isUser: false,
+        imageFile: galleryFile,
+      );
+      setState(() {
+        _messages.add(message);
+        saveNewTask(message);
+      });
+    }
   }
 }
 
@@ -285,20 +319,25 @@ class ChatMessage extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           if (imageFile == null)
-            Container(
-              decoration: BoxDecoration(
-                color: isUser ? Colors.blue : Colors.grey,
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-              padding: EdgeInsets.all(10.0),
-              child: Text(
-                text,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 16.0,
+            ConstrainedBox(
+              constraints: const BoxConstraints(
+                  maxWidth: 300.0), // Set the maximum width
+              child: Container(
+                decoration: BoxDecoration(
+                  color: isUser ? Colors.blue : Colors.grey,
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+                padding: EdgeInsets.all(10.0),
+                child: Text(
+                  text,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 16.0,
+                  ),
+                  maxLines: null, // Allow unlimited lines
                 ),
               ),
-            ),
+            )
         ],
       ),
     );
