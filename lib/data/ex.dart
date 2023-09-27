@@ -6,7 +6,7 @@ class ExcelReader {
   Future<List<String>> readExcel(String sentence) async {
     List<String> res = [];
     try {
-      final ByteData data = await rootBundle.load('assets/data1.xlsx');
+      final ByteData data = await rootBundle.load('assets/data.xlsx');
       final List<int> bytes = data.buffer.asUint8List();
       final excel = Excel.decodeBytes(Uint8List.fromList(bytes));
 

@@ -2,12 +2,12 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 
-Future<String> postImage(File image) async {
-  String output = "Not a medicinal Plant";
+Future<String> postImage_spice(File image) async {
+  String output = "Not a medicinal Spice";
   try {
     var request = http.MultipartRequest(
       'POST',
-      Uri.parse('http://192.168.212.215:8000/predict'),
+      Uri.parse('http://192.168.212.215:9000/predict'),
     );
 
     // Add the image file to the request
@@ -24,7 +24,7 @@ Future<String> postImage(File image) async {
           await response.stream.transform(utf8.decoder).join();
       // Map<String, dynamic> dataMap = json.decode(responseBody);
       if (responseBody == "not") {
-        return "Not a medicinal plant";
+        return "Not a medicinal spice";
       }
       return responseBody;
 

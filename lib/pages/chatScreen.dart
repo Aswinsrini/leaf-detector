@@ -1,11 +1,11 @@
 import 'dart:io';
-import 'package:excel/excel.dart';
 import "package:image_picker/image_picker.dart";
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:leaf_detector/data/database.dart';
 import 'package:leaf_detector/data/ex.dart';
 import 'package:leaf_detector/data/func.dart';
+import 'package:leaf_detector/data/spice.dart';
 
 class ChatScreen extends StatefulWidget {
   @override
@@ -16,6 +16,7 @@ class _ChatScreenState extends State<ChatScreen> {
   final _myBox = Hive.box("mybox");
   ChatDataBase db = ChatDataBase();
 
+  ScrollController _scrollController = new ScrollController();
   final TextEditingController _messageController = TextEditingController();
   List<ChatMessage> _messages = [];
   File? image; // Declare it at the class level
@@ -86,6 +87,8 @@ class _ChatScreenState extends State<ChatScreen> {
               children: <Widget>[
                 Expanded(
                   child: ListView.builder(
+                    // reverse: true,
+                    controller: _scrollController,
                     itemCount: _messages.length,
                     itemBuilder: (context, index) {
                       return _messages[index];
@@ -248,16 +251,23 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   void fileAdded() async {
-    String bot = await postImage(galleryFile!);
-    // print(bot + " from bot");
-    bot = "The Image you provided is " + bot;
+    String bot1 = await postImage(galleryFile!);
+    String bot2 = await postImage_spice(galleryFile!);
+    // print(bot1 + " from bot1");
+    bot1 = "The Image you provided is " + bot1;
+    bot2 = "The Image you provided is " + bot2;
     ChatMessage message = ChatMessage(
       text: '',
       isUser: true,
       imageFile: galleryFile,
     );
     ChatMessage m1 = ChatMessage(
-      text: bot,
+      text: bot1,
+      isUser: false,
+      imageFile: null,
+    );
+    ChatMessage m2 = ChatMessage(
+      text: bot2,
       isUser: false,
       imageFile: null,
     );
@@ -265,6 +275,7 @@ class _ChatScreenState extends State<ChatScreen> {
     setState(() {
       _messages.add(message);
       _messages.add(m1);
+      _messages.add(m2);
       // saveNewTask(message);
     });
     setState(() {
