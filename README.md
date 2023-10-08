@@ -1,6 +1,6 @@
 # leaf_detector
 
-A new Flutter project.
+This application was built using Flutter and Firebase. The fronted part was designed perfectly to the use needs and In the firebase the Machine learning model was trained and integrated.
 
 ## Getting Started
 
