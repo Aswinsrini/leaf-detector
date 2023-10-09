@@ -7,7 +7,7 @@ Future<String> postImage_spice(File image) async {
   try {
     var request = http.MultipartRequest(
       'POST',
-      Uri.parse('http://192.168.212.215:9000/predict'),
+      Uri.parse('http://192.168.171.215:9000/predict'),
     );
 
     // Add the image file to the request

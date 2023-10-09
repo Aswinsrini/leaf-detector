@@ -251,21 +251,21 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   void fileAdded() async {
-    String bot1 = await postImage(galleryFile!);
+    // String bot1 = await postImage(galleryFile!);
     String bot2 = await postImage_spice(galleryFile!);
     // print(bot1 + " from bot1");
-    bot1 = "The Image you provided is " + bot1;
+    // bot1 = "The Image you provided is " + bot1;
     bot2 = "The Image you provided is " + bot2;
     ChatMessage message = ChatMessage(
       text: '',
       isUser: true,
       imageFile: galleryFile,
     );
-    ChatMessage m1 = ChatMessage(
-      text: bot1,
-      isUser: false,
-      imageFile: null,
-    );
+    // ChatMessage m1 = ChatMessage(
+    //   text: bot1,
+    //   isUser: false,
+    //   imageFile: null,
+    // );
     ChatMessage m2 = ChatMessage(
       text: bot2,
       isUser: false,
@@ -274,7 +274,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
     setState(() {
       _messages.add(message);
-      _messages.add(m1);
+      // _messages.add(m1);
       _messages.add(m2);
       // saveNewTask(message);
     });
