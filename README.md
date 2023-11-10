@@ -1,29 +1,28 @@
-# leaf_detector
+# Leaf Detector
 
-This application was built using Flutter and Firebase. The fronted part was designed perfectly to the use needs and In the firebase the Machine learning model was trained and integrated.
+Our application, Leaf Detector, is crafted using Flutter for the front-end and integrated with Firebase, where a machine learning model is trained and seamlessly incorporated.
 
-## Idea:
-We are developing a mobile application called "MediBot" that makes identifying medicinal plants, edible parts, and Ayurvedic products a breeze. With just a photo or text from the packaging, it tells you everything you need to know.
+## Concept:
+We present "MediBot," a mobile app designed to effortlessly identify medicinal plants, edible components, and Ayurvedic products. By simply providing a photo or text from the packaging, users can access comprehensive information.
 
-## How it works:
+## Functionality:
 
-  ## 1.Plant Identification: 
-  Take a picture of a plant's leaves. MediBot identifies the plant and tells you if it has medicinal or edible parts. If it doesn't, it informs you that the plant doesn't have medical properties.
+### 1. Plant Identification:
+Capture an image of a plant's leaves, and MediBot swiftly identifies the plant, specifying if it possesses medicinal or edible parts. If not, it informs users that the plant lacks medicinal properties.
 
-## 2.Raw Materials: 
-For raw materials like ginger or cloves, snap a photo. MediBot identifies them and provides information on their uses and properties.
+### 2. Raw Materials:
+For raw materials such as ginger or cloves, users can snap a photo. MediBot recognizes these items and delivers information about their uses and properties.
 
-## 3.Crude Drugs: 
-For packaged Ayurvedic products, you can either take a picture of the package or input the text from the packaging. MediBot identifies the medicinal herb inside, sharing its unique properties, smell, taste, and diagnostic steps. It also gives you details on the composition if it's not on the package.
+### 3. Crude Drugs:
+In the case of packaged Ayurvedic products, users can either photograph the package or input text from the packaging. MediBot identifies the medicinal herb contained, offering details on its unique properties, smell, taste, and diagnostic steps. Composition details are also provided if not on the package.
 
-## 4.Information Galore:
-For every leaf, raw material, or drug, MediBot offers comprehensive information on edible parts, medicinal uses, and how they help with different diseases.
+### 4. Information Repository:
+MediBot supplies comprehensive information on edible parts, medicinal uses, and their efficacy against various diseases for every leaf, raw material, or drug.
 
-## 5.Interactive Chat: 
-You can also ask questions, and MediBot responds like a friendly chatbot, making it easy to learn about herbs and Ayurvedic products.
+### 5. Interactive Chat:
+Users have the option to ask questions, and MediBot responds in a friendly chatbot manner, facilitating easy learning about herbs and Ayurvedic products.
 
-## 6.Image Upload: 
-If you have a photo of a plant, raw material, or Ayurvedic product, you can upload it for instant clarification.
+### 6. Image Upload:
+For users with photos of plants, raw materials, or Ayurvedic products, Leaf Detector allows instant clarification through image uploads.
 
-
-MediBot is your ultimate guide to Ayurveda, simplifying the world of medicinal plants and Ayurvedic products in a user-friendly and interactive way, and it can even use text from packaging to identify crude drugs.
+MediBot serves as your ultimate Ayurveda guide, simplifying the realm of medicinal plants and Ayurvedic products through a user-friendly and interactive platform. Additionally, it utilizes text from packaging to identify crude drugs.
