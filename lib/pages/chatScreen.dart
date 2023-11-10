@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:leaf_detector/data/database.dart';
 import 'package:leaf_detector/data/ex.dart';
-import 'package:leaf_detector/data/func.dart';
 import 'package:leaf_detector/data/spice.dart';
 
 class ChatScreen extends StatefulWidget {
