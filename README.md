@@ -3,7 +3,7 @@
 Our application, Leaf Detector, is crafted using Flutter for the front end and integrated with Firebase, where a machine-learning model is trained and seamlessly incorporated.
 
 ## Concept:
-We present "MediBot," a mobile app designed to effortlessly identify medicinal plants, edible components, and Ayurvedic products. By simply providing a photo or text from the packaging, users can access comprehensive information.
+We present "MediBot," a mobile app designed to effortlessly identify medicinal plants, edible components, and Ayurvedic products.By simply providing a photo or text from the packaging, users can access comprehensive information.
 
 ## Functionality:
 
