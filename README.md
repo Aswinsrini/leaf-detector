@@ -19,7 +19,7 @@ In the case of packaged Ayurvedic products, users can either photograph the pack
 ### 4. Information Repository:
 MediBot supplies comprehensive information on edible parts, medicinal uses, and their efficacy against various diseases for every leaf, raw material, or drug.
 
-### 5. Interactive Chat:
+### 5. Interactive Chat: 
 Users have the option to ask questions, and MediBot responds in a friendly chatbot manner, facilitating easy learning about herbs and Ayurvedic products.
 
 ### 6. Image Upload:
