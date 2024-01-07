@@ -1,5 +1,5 @@
 # Leaf Detector
-
+ 
 Our application, Leaf Detector, is crafted using Flutter for the front end and integrated with Firebase, where a machine-learning model is trained and seamlessly incorporated.
 
 ## Concept:
